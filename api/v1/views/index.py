@@ -1,17 +1,12 @@
 #!/usr/bin/python3
-"""
-Flask route that returns json status response
-"""
+""" import app_views and create route to status """
 from api.v1.views import app_views
 from flask import jsonify, request
-from models import storage
 
 
 @app_views.route('/status', methods=['GET'])
-def status():
-    """
-    function for status route that returns the status
-    """
+def get_status():
+    """ return the status rout in json form """
     if request.method == 'GET':
-        resp = {"status": "OK"}
-        return jsonify(resp)
+        response = {"status": 'OK'}
+        return jsonify(response)
