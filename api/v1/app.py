@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""API modules needed
-Register a blueprint of app_view
-and uses a teardown method to close the storage
-"""
+""" starting api """
 from os import environ
 from flask import Flask
 from models import storage
@@ -11,12 +8,13 @@ from api.v1.views import app_views
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
+
 @app.teardown_appcontext
 def close(self):
-    """Method to handle teardown appcontext"""
+    """Clossing session method"""
     storage.close()
 
 if __name__ == "__main__":
-    env_host = getenv('HBNB_API_HOST', default='0.0.0.0')
-    env_port = getenv('HBNB_API_PORT', default='5000')
-    app.run(host=env_host, port=env_port, threaded=True)
+    host = environ.get('HBNB_API_HOST', '0.0.0.0')
+    port = environ.get('HBNB_API_PORT', '5000')
+    app.run(host=host, port=port, threaded=True)
