@@ -15,6 +15,6 @@ def close(self):
     storage.close()
 
 if __name__ == "__main__":
-    host = environ.get('HBNB_API_HOST', '0.0.0.0')
-    port = environ.get('HBNB_API_PORT', '5000')
-    app.run(host=host, port=port, threaded=True)
+    env_host = environ.get('HBNB_API_HOST', deafault='0.0.0.0')
+    env_port = environ.get('HBNB_API_PORT', default=5000)
+    app.run(host=env_host, port=env_port, threaded=True)
