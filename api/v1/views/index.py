@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""Importing modules needed"""
 from api.v1.views import app_views
 from flask import jsonify
 
