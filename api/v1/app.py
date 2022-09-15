@@ -17,6 +17,6 @@ def close(self):
 
 
 if __name__ == '__main__':
-    env_host = getenv('HBNB_API_HOST')
-    env_port = getenv('HBNB_API_PORT')
+    env_host = getenv('HBNB_API_HOST', default='0.0.0.0')
+    env_port = getenv('HBNB_API_PORT', default=5000)
     app.run(host=env_host, port=env_port, threaded=True)
