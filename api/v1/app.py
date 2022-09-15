@@ -3,10 +3,11 @@
 Register a blueprint of app_view
 and uses a teardown method to close the storage
 """
-from models import storage
-from api.v1.views import app_views
-from flask import Flask
 from os import getenv
+import models
+from flask import Flask
+from api.v1.views import app_views
+
 
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def close(self):
     """Method to handle teardown appcontext"""
-    storage.close()
+    models.storage.close()
 
 
 if __name__ == '__main__':
