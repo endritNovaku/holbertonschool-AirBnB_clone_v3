@@ -1,20 +1,35 @@
 #!/usr/bin/python3
-""" starting api """
-from os import environ
+"""
+Flask App that integrates with AirBnB static HTML Template
+"""
+from api.v1.views import app_views
 from flask import Flask
 from models import storage
-from api.v1.views import app_views
+import os
 
+# Global Flask Application Variable: app
 app = Flask(__name__)
+
+# flask server environmental setup
+host = os.getenv('HBNB_API_HOST', '0.0.0.0')
+port = os.getenv('HBNB_API_PORT', 5000)
+
+# app_views BluePrint defined in api.v1.views
 app.register_blueprint(app_views)
 
 
+# begin flask page rendering
 @app.teardown_appcontext
-def close(self):
-    """Clossing session method"""
+def teardown_db(exception):
+    """
+    after each request, this method calls .close() (i.e. .remove()) on
+    the current SQLAlchemy Session
+    """
     storage.close()
 
+
 if __name__ == "__main__":
-    env_host = environ.get('HBNB_API_HOST', deafault='0.0.0.0')
-    env_port = environ.get('HBNB_API_PORT', default=5000)
-    app.run(host=env_host, port=env_port, threaded=True)
+    """
+    MAIN Flask App
+    """
+    app.run(host=host, port=port)
