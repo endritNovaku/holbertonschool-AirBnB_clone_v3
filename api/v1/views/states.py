@@ -59,7 +59,7 @@ def update_state(state_id):
     """ updates a state object """
     if request.method == 'PUT':
         if not request.get_json():
-            return make_response(jsonify({"error": "Not a JSON"}), 404)
+            return make_response(jsonify({"error": "Not a JSON"}), 400)
         state_updated = storage.get(State, state_id)
         if state_updated is not None:
             for key, value in request.get_json().items():
