@@ -45,7 +45,7 @@ def delete_city(city_id):
             abort(404)
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'])
+@app_views.route('/states/<state_id>/cities/', methods=['POST'])
 def create_city(state_id):
     """ create a city """
     if request.method == 'POST':
@@ -73,7 +73,8 @@ def update_city(city_id):
         city_updated = storage.get(City, city_id)
         if city_updated is not None:
             for key, value in request.get_json().items():
-                if key != "id" and key != "created_at" and key != "updated_at" and key != "state_id":
+                if key != "id" and key != "created_at" and key != "updated_at"\
+                        and key != "state_id":
                     setattr(city_updated, key, value)
             storage.save()
             return make_response(jsonify(city_updated.to_dict()), 200)
