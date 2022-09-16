@@ -14,10 +14,10 @@ def get_states():
         for obj in storage.all(State).values():
             response_list.append(obj.to_dict())
         return jsonify(response_list)
- 
+
 
 @app_views.route('/states/<state_id>', methods=['GET'])
-def get_state_by_id(state_id): 
+def get_state_by_id(state_id):
     """ return the state by id in json form """
     if request.method == 'GET':
         obj = storage.get(State, state_id)
@@ -37,9 +37,9 @@ def delete_state_by_id(state_id):
         return make_response(jsonify({}), 200)
     else:
         abort(404)
-        
 
-@app_views.route('/states', methods=['POST'])
+
+@app_views.route('/states/', methods=['POST'])
 def create_state():
     """ creates a new state object """
     if request.method == 'POST':
@@ -52,6 +52,7 @@ def create_state():
         storage.new(new_state)
         storage.save()
         return make_response(jsonify(new_state.to_dict()), 201)
+
 
 @app_views.route('/states/<state_id>', methods=['PUT'])
 def update_state(state_id):
