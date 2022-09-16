@@ -44,9 +44,9 @@ def create_state():
     """ creates a new state object """
     if request.method == 'POST':
         if not request.get_json():
-            return make_response(jsonify({"error": "Not a JSON"}), 404)
+            return make_response(jsonify({"error": "Not a JSON"}), 400)
         if "name" not in request.get_json():
-            return make_response(jsonify({"error": "Missing name"}), 404)
+            return make_response(jsonify({"error": "Missing name"}), 400)
         state_dictionary = request.get_json()
         new_state = State(**state_dictionary)
         storage.new(new_state)
