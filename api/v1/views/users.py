@@ -65,7 +65,8 @@ def update_user(user_id):
         user_updated = storage.get(User, user_id)
         if user_updated is not None:
             for key, value in request.get_json().items():
-                if key != "id" and key != "created_at" and key != "updated_at" and key != "email":
+                if key != "id" and key != "created_at"\
+                        and key != "updated_at" and key != "email":
                     setattr(user_updated, key, value)
             storage.save()
             return make_response(jsonify(user_updated.to_dict()), 200)
