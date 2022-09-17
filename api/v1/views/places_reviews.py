@@ -23,7 +23,7 @@ def get_reviews(place_id):
 
 
 @app_views.route('/reviews/<review_id>', methods=['GET'])
-def get_review_by_id(reviews_id):
+def get_review_by_id(review_id):
     """ return a review by id in json form """
     if request.method == 'GET':
         review = storage.get(Review, review_id)
