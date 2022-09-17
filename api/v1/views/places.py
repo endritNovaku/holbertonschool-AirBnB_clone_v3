@@ -5,6 +5,7 @@ from flask import jsonify, request, abort, make_response
 from models import storage
 from models.city import City
 from models.place import Place
+from models.user import User
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'])
@@ -55,8 +56,11 @@ def create_place(city_id):
             return make_response(jsonify({"error": "Missing name"}), 400)
         if "user_id" not in request.get_json():
             return make_response(jsonify({"error": "Missing user_id"}), 400)
+        test = request.get_json()
+        a_test = test['user_id']
+        user = storage.get(User, a_test)
         city = storage.get(City, city_id)
-        if city_id is not None and city is not None:
+        if city_id is not None and city is not None and user is not None:
             place_dictionary = request.get_json()
             new_place = Place(**place_dictionary)
             new_place.city_id = city.id
