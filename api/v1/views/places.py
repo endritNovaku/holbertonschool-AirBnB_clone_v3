@@ -56,9 +56,9 @@ def create_place(city_id):
             return make_response(jsonify({"error": "Missing name"}), 400)
         if "user_id" not in request.get_json():
             return make_response(jsonify({"error": "Missing user_id"}), 400)
-        test = request.get_json()
-        a_test = test['user_id']
-        user = storage.get(User, a_test)
+        api_content = request.get_json()
+        user_id = api_content['user_id']
+        user = storage.get(User, user_id)
         city = storage.get(City, city_id)
         if city_id is not None and city is not None and user is not None:
             place_dictionary = request.get_json()
