@@ -39,7 +39,7 @@ def delete_amenity_by_id(amenity_id):
         abort(404)
 
 
-@app_views.route('/amenities', methods=['POST'])
+@app_views.route('/amenities/', methods=['POST'])
 def create_amenity():
     """ creates a new amenity object """
     if request.method == 'POST':
